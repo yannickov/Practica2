@@ -1,0 +1,48 @@
+
+#include <iostream>
+
+using namespace std;
+
+
+class Roses{
+    public:
+    int real_part;
+    int img_part;
+    void sumar(double a,double b);
+    
+    Roses(int re=0,int im=0){re=real_part;im=img_part;}
+
+    Roses operator +(Roses const &otro){
+    Roses temporal;
+    temporal.real_part= real_part + otro.real_part;
+    temporal.img_part= img_part + otro.img_part;
+    return(temporal);}
+    friend class operadora
+    
+};
+
+void Roses::sumar(double a,double b){
+    cout<<"la suma es: "<<(a-b);
+}
+    
+int main()
+{
+    double num1Re,num1Im,num2Re,num2Im;
+    int opcion;
+    cout<<"Calculadora de numeros complejos \n\nIngrese dos numeros complejos y elija la opcion de la operacion que desee realizar.";
+    cout<<"\nIngrese el primer numero ahora. Asi: primero parte real, luego enter,luego parte imaginaria: \n";
+    cin>>num1Re;
+    cin>>num1Im;
+    cout<<"Bien! Ahora el segundo numero de la misma manera: \n";
+    cin>>num2Re;
+    cin>>num2Im;
+    Roses ob1(num1Re,num1Im);
+    Roses ob2(num2Re,num2Im);
+    cout<<"Ahora elija la operacion que desea realizar: ";
+    cout<<"\n1. Suma\n2. Resta\n3. Multiplicacion\n4. Division\n5. Conjugado\n6. Modulo\n";
+    cin>>opcion;
+    
+    ob1.sumar(2,3);
+    
+    return 0;
+}
