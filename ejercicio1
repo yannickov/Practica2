@@ -1,4 +1,3 @@
-
 #include <iostream>
 
 using namespace std;
@@ -6,24 +5,18 @@ using namespace std;
 
 class Roses{
     public:
-    int real_part;
-    int img_part;
-    void sumar(double a,double b);
-    
-    Roses(int re=0,int im=0){re=real_part;im=img_part;}
+    double real_part;
+    double img_part;
+    Roses(double re=0,double im=0){real_part=re;img_part=im;}
 
     Roses operator +(Roses const &otro){
     Roses temporal;
     temporal.real_part= real_part + otro.real_part;
     temporal.img_part= img_part + otro.img_part;
     return(temporal);}
-    friend class operadora
+    void mostrar() { cout << real_part << " " << img_part <<"i"<< endl; }
     
 };
-
-void Roses::sumar(double a,double b){
-    cout<<"la suma es: "<<(a-b);
-}
     
 int main()
 {
@@ -40,9 +33,8 @@ int main()
     Roses ob2(num2Re,num2Im);
     cout<<"Ahora elija la operacion que desea realizar: ";
     cout<<"\n1. Suma\n2. Resta\n3. Multiplicacion\n4. Division\n5. Conjugado\n6. Modulo\n";
-    cin>>opcion;
-    
-    ob1.sumar(2,3);
+    Roses ob3=ob1+ob2;
+    ob3.mostrar();
     
     return 0;
 }
