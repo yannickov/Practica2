@@ -1,20 +1,48 @@
 #include <iostream>
-
+#include <cmath>
 using namespace std;
 
 
-class Roses{
+class Complejo{
     public:
     double real_part;
     double img_part;
-    Roses(double re=0,double im=0){real_part=re;img_part=im;}
+    Complejo(double re=0,double im=0){real_part=re;img_part=im;}
 
-    Roses operator +(Roses const &otro){
-    Roses temporal;
+    Complejo operator +(Complejo const &otro){
+    Complejo temporal;
     temporal.real_part= real_part + otro.real_part;
     temporal.img_part= img_part + otro.img_part;
     return(temporal);}
+    
+    Complejo operator -(Complejo const &otro){
+    Complejo temporal;
+    temporal.real_part= real_part - otro.real_part;
+    temporal.img_part= img_part - otro.img_part;
+    return(temporal);}
+    
+    Complejo operator *(Complejo const &otro){
+    Complejo temporal;
+    temporal.real_part= ((real_part*otro.real_part)-(img_part*otro.img_part));
+    temporal.img_part= ((real_part*otro.img_part)+(img_part*otro.real_part));
+    return(temporal);}
+    
+    Complejo operator /(Complejo const &otro){
+    Complejo temporal;
+    temporal.real_part= ((real_part*otro.real_part)+(img_part*otro.img_part))/(pow(otro.real_part,2)+pow(otro.img_part,2));
+    temporal.img_part= ((img_part*otro.real_part)-(real_part*otro.img_part))/(pow(otro.real_part,2)+pow(otro.img_part,2));
+    return(temporal);}
+    
+    Complejo operator %(Complejo const &otro){
+    Complejo temporal;
+    temporal.real_part= otro.real_part;
+    temporal.img_part= -otro.img_part;
+    return(temporal);}
+    
+    void magnitud(double remag,double imagg){cout<<(sqrt(pow(remag,2)+pow(imagg,2)));}
+    
     void mostrar() { cout << real_part << " " << img_part <<"i"<< endl; }
+    
     
 };
     
@@ -29,12 +57,10 @@ int main()
     cout<<"Bien! Ahora el segundo numero de la misma manera: \n";
     cin>>num2Re;
     cin>>num2Im;
-    Roses ob1(num1Re,num1Im);
-    Roses ob2(num2Re,num2Im);
+    Complejo ob1(num1Re,num1Im);
+    Complejo ob2(num2Re,num2Im);
     cout<<"Ahora elija la operacion que desea realizar: ";
     cout<<"\n1. Suma\n2. Resta\n3. Multiplicacion\n4. Division\n5. Conjugado\n6. Modulo\n";
-    Roses ob3=ob1+ob2;
-    ob3.mostrar();
     
     return 0;
 }
