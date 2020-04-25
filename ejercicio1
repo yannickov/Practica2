@@ -5,11 +5,11 @@ using namespace std;
 
 class Complejo{
     public:
-    double real_part;
+    double real_part;                                 //Atributos requeridos
     double img_part;
-    Complejo(double re=0,double im=0){real_part=re;img_part=im;}
-
-    Complejo operator +(Complejo const &otro){
+    Complejo(double re=0,double im=0){real_part=re;img_part=im;}       //Constructores requeridos
+                                                                      //Comienzan sobregargas de operadores                                                                            
+    Complejo operator +(Complejo const &otro){                         
     Complejo temporal;
     temporal.real_part= real_part + otro.real_part;
     temporal.img_part= img_part + otro.img_part;
@@ -39,18 +39,20 @@ class Complejo{
     temporal.img_part= -otro.img_part;
     return(temporal);}
     
-    void magnitud(double remag,double imagg){cout<<"La magnitud es: "<<(sqrt(pow(remag,2)+pow(imagg,2)))<<"\n";}
+                                                                //Funcion para encontrar la magnitud
+    void magnitud(double remag,double imagg){cout<<"La magnitud es: "<<(sqrt(pow(remag,2)+pow(imagg,2)))<<"\n";}  
     
-    void mostrar() { cout <<"La respuesta es:   "<< real_part << " +(" << img_part <<"i"<<")"<< endl; }
+                                                       //Funcion para mostrar la respuesta luego de usar algun operador
+    void mostrar() { cout <<"La respuesta es:   "<< real_part << " +(" << img_part <<"i"<<")"<< endl; }  
     
-    ~Complejo(){cout<<"¡Complejo destruido!\n";}
+    ~Complejo(){cout<<"¡Complejo destruido!\n";}                //Destructor requerido
     
     
 };
     
 int main()
 {
-    double num1Re,num1Im,num2Re,num2Im;
+    double num1Re,num1Im,num2Re,num2Im;                 //Variables que reciben los datos que seran atributos de los objetos 
     int opcion;
     cout<<"Calculadora de numeros complejos \n\nIngrese dos numeros complejos y elija la opcion de la operacion que desee realizar.";
     cout<<"\nIngrese el primer numero ahora. Asi: primero parte real, luego enter,luego parte imaginaria: \n";
@@ -59,13 +61,13 @@ int main()
     cout<<"Bien! Ahora el segundo numero de la misma manera: \n";
     cin>>num2Re;
     cin>>num2Im;
-    Complejo ob1(num1Re,num1Im);
+    Complejo ob1(num1Re,num1Im);                //Se crean los objetos de las clases con sus atributos
     Complejo ob2(num2Re,num2Im);
     cout<<"Ahora elija la operacion que desea realizar: ";
     cout<<"\n1. Suma\n2. Resta\n3. Multiplicacion\n4. Division\n5. Conjugado (primer numero)\n6. Modulo (primer numero)\n";
     cin>>opcion;
     Complejo ob3;
-    
+                                    //ciclo switch para llevar a cabo la instruccion dada en el menu 
     switch(opcion){
         case 1:
         ob3= ob1+ob2; ob3.mostrar();break;
