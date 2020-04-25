@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <cmath>
 using namespace std;
 
 class Vertice{
@@ -21,6 +21,9 @@ class Circulo{
     Circulo(Vertice ver1){
         CirOb1=ver1;}
     Circulo(const Circulo&)=delete;
+    double perimetro(){
+        return((sqrt(pow(CirOb1.Cx,2)+pow(CirOb1.Cy,2)))*2*M_PI);
+    }
 };
 class Triangulo{
     Vertice TriOb1;Vertice TriOb2;Vertice TriOb3;
