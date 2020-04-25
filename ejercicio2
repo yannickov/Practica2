@@ -6,7 +6,8 @@ class Vertice{
     double Cx;
     double Cy;
     public:
-    Vertice(double x,double y){Cx=x; Cy=y;}
+    Vertice(double x=0,double y=0){Cx=x; Cy=y;}
+    Vertice(const Vertice&)=default;
     double getCoord()const{cout<<"El valor de las coordenadas es ("<<Cx<<","<<Cy<<")";}
     friend class Circulo;
     friend class Triangulo;
@@ -19,36 +20,38 @@ class Circulo{
     Vertice CirOb1;
     Circulo(Vertice ver1){
         CirOb1=ver1;}
+    Circulo(const Circulo&)=delete;
 };
 class Triangulo{
     Vertice TriOb1;Vertice TriOb2;Vertice TriOb3;
-    Triangulo(Vertice ver1,Vertice ver2){
+    Triangulo(Vertice ver1,Vertice ver2,Vertice ver3){
         TriOb1=ver1; TriOb2=ver2; TriOb3=ver3;
     }
+    Triangulo(const Triangulo&)=delete;
 };
 class Rectangulo{
     Vertice RecOb1;Vertice RecOb2;Vertice RecOb3;Vertice RecOb4;
     Rectangulo(Vertice ver1,Vertice ver2,Vertice ver3,Vertice ver4){
         RecOb1=ver1; RecOb2=ver2; RecOb3=ver3; RecOb4=ver4;
     }
+    Rectangulo(const Rectangulo&)=delete;
 };
 class Pentagono{
     Vertice PenOb1;Vertice PenOb2;Vertice PenOb3;Vertice PenOb4;Vertice PenOb5;
     Pentagono(Vertice ver1,Vertice ver2,Vertice ver3,Vertice ver4,Vertice ver5){
         PenOb1=ver1; PenOb2=ver2; PenOb3=ver3; PenOb4=ver4; PenOb5=ver5;
     }
+    Pentagono(const Pentagono&)=delete;
 };
 class Hexagono{
     Vertice HexOb1;Vertice HexOb2;Vertice HexOb3;Vertice HexOb4;Vertice HexOb5;Vertice HexOb6;
     Hexagono(Vertice ver1,Vertice ver2, Vertice ver3, Vertice ver4, Vertice ver5,Vertice ver6){
         HexOb1=ver1; HexOb2=ver2; HexOb3=ver3; HexOb4=ver4; HexOb5=ver5; HexOb6=ver6;
     }
+    Hexagono(const Hexagono&)=delete;
 };
 
 int main()
 {
-    Vertice ob(2,3);
-    cout<<ob.getCoord();
-
     return 0;
 }
