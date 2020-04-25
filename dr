@@ -9,6 +9,13 @@ class Vertice{
     Vertice(double x=0,double y=0){Cx=x; Cy=y;}
     Vertice(const Vertice&)=default;
     double getCoord()const{cout<<"El valor de las coordenadas es ("<<Cx<<","<<Cy<<")";}
+    
+    double operator %(Vertice const &otro){
+        Vertice temporal;
+        temporal.Cx=Cx-otro.Cx;
+        temporal.Cy=Cy-otro.Cy;
+        return(sqrt(pow(abs(temporal.Cx),2)+pow(abs(temporal.Cy),2)));
+    
     friend class Circulo;
     friend class Triangulo;
     friend class Rectangulo;
@@ -25,7 +32,7 @@ class Circulo{
         return((sqrt(pow(CirOb1.Cx,2)+pow(CirOb1.Cy,2)))*2*M_PI);
     }
     double Carea(){
-        return(pow((sqrt(pow(CirOb1.Cx,2)+pow(CirOb1.Cy,2))),2)*M_PI)
+        return(pow((sqrt(pow(CirOb1.Cx,2)+pow(CirOb1.Cy,2))),2)*M_PI);
     }
 };
 class Triangulo{
@@ -34,8 +41,11 @@ class Triangulo{
         TriOb1=ver1; TriOb2=ver2; TriOb3=ver3;
     }
     Triangulo(const Triangulo&)=delete;
-    double Tperimetro(){
-        return()
+    double Tperimetro(Vertice v1,Vertice v2,Vertice v3){
+        double line1=v1%v2;
+        double line2=v2%v3;
+        double line3=v3%v4;
+        return(line1+line2+line3);
     }
 };
 class Rectangulo{
