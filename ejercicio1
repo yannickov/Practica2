@@ -39,9 +39,11 @@ class Complejo{
     temporal.img_part= -otro.img_part;
     return(temporal);}
     
-    void magnitud(double remag,double imagg){cout<<(sqrt(pow(remag,2)+pow(imagg,2)));}
+    void magnitud(double remag,double imagg){cout<<"La magnitud es: "<<(sqrt(pow(remag,2)+pow(imagg,2)))<<"\n";}
     
-    void mostrar() { cout << real_part << " " << img_part <<"i"<< endl; }
+    void mostrar() { cout <<"La respuesta es:   "<< real_part << " +(" << img_part <<"i"<<")"<< endl; }
+    
+    ~Complejo(){cout<<"¡Complejo destruido!\n";}
     
     
 };
@@ -60,7 +62,23 @@ int main()
     Complejo ob1(num1Re,num1Im);
     Complejo ob2(num2Re,num2Im);
     cout<<"Ahora elija la operacion que desea realizar: ";
-    cout<<"\n1. Suma\n2. Resta\n3. Multiplicacion\n4. Division\n5. Conjugado\n6. Modulo\n";
+    cout<<"\n1. Suma\n2. Resta\n3. Multiplicacion\n4. Division\n5. Conjugado (primer numero)\n6. Modulo (primer numero)\n";
+    cin>>opcion;
+    Complejo ob3;
     
+    switch(opcion){
+        case 1:
+        ob3= ob1+ob2; ob3.mostrar();break;
+        case 2:
+        ob3= ob1-ob2; ob3.mostrar();break;
+        case 3:
+        ob3= ob1*ob2; ob3.mostrar();break;
+        case 4:
+        ob3= ob1/ob2; ob3.mostrar();break;
+        case 5:
+        ob3= ob2%ob1; ob3.mostrar();break;
+        case 6:
+        ob3.magnitud(num1Re,num1Im);
+    }
     return 0;
 }
