@@ -1,0 +1,142 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+class Vertice{
+    double Cx;
+    double Cy;
+    public:
+    Vertice(double x=0,double y=0){Cx=x; Cy=y;}
+    //Vertice(const Vertice&)=default;
+    double getCoord()const{cout<<"El valor de las coordenadas es ("<<Cx<<","<<Cy<<")";}
+    
+    double operator %(Vertice const &otro){
+        Vertice temporal;
+        temporal.Cx=Cx-otro.Cx;
+        temporal.Cy=Cy-otro.Cy;
+        return(sqrt(pow(abs(temporal.Cx),2)+pow(abs(temporal.Cy),2)));
+    }
+    friend class Circulo;
+
+};
+
+class Circulo{
+    public:
+    Circulo(Vertice ver1){
+    Vertice CirOb1=ver1;}
+    double Cperimetro(Vertice ver1){
+        return((sqrt(pow(ver1.Cx,2)+pow(ver1.Cy,2)))*2*M_PI);
+    }
+    double Carea(Vertice ver1){
+        return(pow((sqrt(pow(ver1.Cx,2)+pow(ver1.Cy,2))),2)*M_PI);
+    }
+    Circulo(const Circulo&)=delete;
+};
+class Triangulo{
+    public:
+    Triangulo(Vertice ver1,Vertice ver2,Vertice ver3){
+        Vertice TriOb1=ver1;Vertice TriOb2=ver2;Vertice TriOb3=ver3;
+    }
+    Triangulo(const Triangulo&)=delete;
+    double Tperimetro(Vertice v1,Vertice v2,Vertice v3){
+        double line1=v1%v2;
+        double line2=v2%v3;
+        double line3=v3%v1;
+        return(line1+line2+line3);
+    }
+    double Tarea(Vertice v1,Vertice v2,Vertice v3){
+        double line1=v1%v2;
+        double line2=v2%v3;
+        double line3=v3%v1;
+        return((line1*(sqrt(pow(line2,2)-pow((line1/2),2))))/2);}
+};
+class Rectangulo{
+    public:
+    Rectangulo(Vertice ver1,Vertice ver2,Vertice ver3,Vertice ver4){
+        Vertice RecOb1=ver1;Vertice RecOb2=ver2;Vertice RecOb3=ver3;Vertice RecOb4=ver4;
+    }
+    Rectangulo(const Rectangulo&)=delete;
+    
+    double Rperimetro(Vertice v1,Vertice v2,Vertice v3,Vertice v4){
+        double line1=v1%v2;
+        double line2=v2%v3;
+        double line3=v3%v4;
+        double line4=v4%v1;
+        return(line1+line2+line3+line4);
+    }
+    double Rarea(Vertice v1,Vertice v2,Vertice v3){
+        double line1=v1%v2;
+        double line2=v2%v3;
+        return(line1*line2);
+    }
+};
+class Pentagono{
+    public:
+    Pentagono(Vertice ver1,Vertice ver2,Vertice ver3,Vertice ver4,Vertice ver5){
+        Vertice PenOb1=ver1;Vertice PenOb2=ver2;Vertice PenOb3=ver3;Vertice PenOb4=ver4;Vertice PenOb5=ver5;
+    }
+    Pentagono(const Pentagono&)=delete;
+    
+    double Pperimetro(Vertice v1,Vertice v2,Vertice v3,Vertice v4,Vertice v5){
+        double line1=v1%v2;
+        double line2=v2%v3;
+        double line3=v3%v4;
+        double line4=v4%v5;
+        double line5=v5%v1;
+        return(line1+line2+line3+line4+line5);
+    }
+    double Parea(Vertice v1,Vertice v2){
+        double line1=v1%v2;
+        double apotema=line1/(2*tan(0.628319));
+        return((5*line1*apotema)/2);
+    }
+};
+class Hexagono{
+    public:
+    Hexagono(Vertice ver1,Vertice ver2, Vertice ver3, Vertice ver4, Vertice ver5,Vertice ver6){
+        Vertice HexOb1=ver1;Vertice HexOb2=ver2;Vertice HexOb3=ver3;Vertice HexOb4=ver4;Vertice HexOb5=ver5;Vertice HexOb6=ver6;
+    }
+    Hexagono(const Hexagono&)=delete;
+    
+    double Hperimetro(Vertice v1,Vertice v2,Vertice v3,Vertice v4,Vertice v5,Vertice v6){
+        double line1=v1%v2;
+        double line2=v2%v3;
+        double line3=v3%v4;
+        double line4=v4%v5;
+        double line5=v5%v6;
+        double line6=v6%v1;
+        return(line1+line2+line3+line4+line5);
+    }
+    double Harea(Vertice v1,Vertice v2){
+        double line1=v1%v2;
+        double apotema=line1/(2*tan(0.523599));
+        return(3*line1*apotema);
+    }
+
+};
+int main()
+{
+    int opcion; double ve1x,ve1y,ve2x,ve2y,ve3x,ve3y,ve4x,ve4y,ve5x,ve5y,ve6x,ve6y;
+    cout<<"Creador de figuras geométricas!\n\nElija la opcion de la figura que desea ingresar: \n";
+    cout<<"1. Circulo\n2. Triangulo\n3. Rectangulo\n4. Pentagono\n5. Hexagono\n:";
+    cin>>opcion;
+    switch(opcion){
+        case 1:
+        cout<<"Ingrese el primer vertice. Primero x, luego y:\nSe ha creado un circulo!\n";
+        cin>>ve1x;cin>>ve1y;Vertice objeto(ve1x,ve1y);Circulo Cobjeto(objeto);
+        cout<<"El perimetro es:"<<Cobjeto.Cperimetro(objeto)<<"\ny el area es: "<<Cobjeto.Carea(objeto);
+        break;
+        
+        case 2:
+        cout<<"Ingrese el primer vertice. Primero x, luego y:\n";
+        cin>>ve1x;cin>>ve1y;Vertice objeto1(ve1x,ve1y);Triangulo Tobjeto1(objeto1);
+        cout<<"Ingrese el segundo vertice. Primero x, luego y:\n";
+        cin>>ve2x;cin>>ve2y;Vertice objeto2(ve2x,ve2y);Triangulo Tobjeto2(objeto2);
+        cout<<"Ingrese el tercer vertice. Primero x, luego y:\nSe ha creado un Triangulo!\n";
+        cin>>ve3x;cin>>ve3y;Vertice objeto2(ve3x,ve3y);Triangulo Tobjeto3(objeto3);
+        cout<<"El perimetro es:"<<Tobjeto.Cperimetro(objeto1,objeto2,objeto3);
+        cout<<"\ny el area es: "<<Tobjeto.Carea(objeto1,objeto2,objeto3);
+        break;
+    }
+    return 0;
+}
