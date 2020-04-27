@@ -3,58 +3,165 @@
 using namespace std;
 
 class Vertice{
-    double Cx;
+    double Cx;                      //Variables para las coordenadas
     double Cy;
     public:
-    Vertice(double x=0,double y=0){Cx=x; Cy=y;}
-    Vertice(const Vertice&)=default;
-    double getCoord()const{cout<<"El valor de las coordenadas es ("<<Cx<<","<<Cy<<")";}
-    friend class Circulo;
-    friend class Triangulo;
-    friend class Rectangulo;
-    friend class Pentagono;
-    friend class Hexagono;
-};
-
-class Circulo{
-    Vertice CirOb1;
-    Circulo(Vertice ver1){
-        CirOb1=ver1;}
-    Circulo(const Circulo&)=delete;
-    double perimetro(){
-        return((sqrt(pow(CirOb1.Cx,2)+pow(CirOb1.Cy,2)))*2*M_PI);
+    Vertice(double x=0,double y=0){Cx=x; Cy=y;}         //Constructor parametrizado
+    Vertice(const Vertice&)=default;                    //Constrictor copia
+    double getCoord()const{cout<<"El valor de las coordenadas es ("<<Cx<<","<<Cy<<")";}     //Metodo para obtener una coordenada
+    
+    double operator %(Vertice const &otro){          //Sobrecarga del operador % para medir la distancia entre dos puntos
+        Vertice temporal;
+        temporal.Cx=Cx-otro.Cx;
+        temporal.Cy=Cy-otro.Cy;
+        return(sqrt(pow(abs(temporal.Cx),2)+pow(abs(temporal.Cy),2)));
     }
+    friend class Circulo;
+
+};
+                                        //Comienza la declaración de clases. Todas con sus metodos para perimetro y area.
+class Circulo{
+    public:
+    Circulo(Vertice ver1){
+    Vertice CirOb1=ver1;}
+    double Cperimetro(Vertice ver1){
+        return((sqrt(pow(ver1.Cx,2)+pow(ver1.Cy,2)))*2*M_PI);
+    }
+    double Carea(Vertice ver1){
+        return(pow((sqrt(pow(ver1.Cx,2)+pow(ver1.Cy,2))),2)*M_PI);
+    }
+    Circulo(const Circulo&)=delete;
 };
 class Triangulo{
-    Vertice TriOb1;Vertice TriOb2;Vertice TriOb3;
+    public:
     Triangulo(Vertice ver1,Vertice ver2,Vertice ver3){
-        TriOb1=ver1; TriOb2=ver2; TriOb3=ver3;
+        Vertice TriOb1=ver1;Vertice TriOb2=ver2;Vertice TriOb3=ver3;
     }
     Triangulo(const Triangulo&)=delete;
+    double Tperimetro(Vertice v1,Vertice v2,Vertice v3){
+        double line1=v1%v2;
+        double line2=v2%v3;
+        double line3=v3%v1;
+        return(line1+line2+line3);
+    }
+    double Tarea(Vertice v1,Vertice v2,Vertice v3){
+        double line1=v1%v2;
+        double line2=v2%v3;
+        double line3=v3%v1;
+        return((line1*(sqrt(pow(line2,2)-pow((line1/2),2))))/2);}
 };
 class Rectangulo{
-    Vertice RecOb1;Vertice RecOb2;Vertice RecOb3;Vertice RecOb4;
+    public:
     Rectangulo(Vertice ver1,Vertice ver2,Vertice ver3,Vertice ver4){
-        RecOb1=ver1; RecOb2=ver2; RecOb3=ver3; RecOb4=ver4;
+        Vertice RecOb1=ver1;Vertice RecOb2=ver2;Vertice RecOb3=ver3;Vertice RecOb4=ver4;
     }
     Rectangulo(const Rectangulo&)=delete;
+    
+    double Rperimetro(Vertice v1,Vertice v2,Vertice v3,Vertice v4){
+        double line1=v1%v2;
+        double line2=v2%v3;
+        double line3=v3%v4;
+        double line4=v4%v1;
+        return(line1+line2+line3+line4);
+    }
+    double Rarea(Vertice v1,Vertice v2,Vertice v3){
+        double line1=v1%v2;
+        double line2=v2%v3;
+        return(line1*line2);
+    }
 };
 class Pentagono{
-    Vertice PenOb1;Vertice PenOb2;Vertice PenOb3;Vertice PenOb4;Vertice PenOb5;
+    public:
     Pentagono(Vertice ver1,Vertice ver2,Vertice ver3,Vertice ver4,Vertice ver5){
-        PenOb1=ver1; PenOb2=ver2; PenOb3=ver3; PenOb4=ver4; PenOb5=ver5;
+        Vertice PenOb1=ver1;Vertice PenOb2=ver2;Vertice PenOb3=ver3;Vertice PenOb4=ver4;Vertice PenOb5=ver5;
     }
     Pentagono(const Pentagono&)=delete;
+    
+    double Pperimetro(Vertice v1,Vertice v2,Vertice v3,Vertice v4,Vertice v5){
+        double line1=v1%v2;
+        double line2=v2%v3;
+        double line3=v3%v4;
+        double line4=v4%v5;
+        double line5=v5%v1;
+        return(line1+line2+line3+line4+line5);
+    }
+    double Parea(Vertice v1,Vertice v2){
+        double line1=v1%v2;
+        double apotema=line1/(2*tan(0.628319));
+        return((5*line1*apotema)/2);
+    }
 };
 class Hexagono{
-    Vertice HexOb1;Vertice HexOb2;Vertice HexOb3;Vertice HexOb4;Vertice HexOb5;Vertice HexOb6;
+    public:
     Hexagono(Vertice ver1,Vertice ver2, Vertice ver3, Vertice ver4, Vertice ver5,Vertice ver6){
-        HexOb1=ver1; HexOb2=ver2; HexOb3=ver3; HexOb4=ver4; HexOb5=ver5; HexOb6=ver6;
+        Vertice HexOb1=ver1;Vertice HexOb2=ver2;Vertice HexOb3=ver3;Vertice HexOb4=ver4;Vertice HexOb5=ver5;Vertice HexOb6=ver6;
     }
     Hexagono(const Hexagono&)=delete;
-};
+    
+    double Hperimetro(Vertice v1,Vertice v2,Vertice v3,Vertice v4,Vertice v5,Vertice v6){
+        double line1=v1%v2;
+        double line2=v2%v3;
+        double line3=v3%v4;
+        double line4=v4%v5;
+        double line5=v5%v6;
+        double line6=v6%v1;
+        return(line1+line2+line3+line4+line5);
+    }
+    double Harea(Vertice v1,Vertice v2){
+        double line1=v1%v2;
+        double apotema=line1/(2*tan(0.523599));
+        return(3*line1*apotema);
+    }
 
+};
 int main()
 {
+    int opcion; double ve1x,ve1y,ve2x,ve2y,ve3x,ve3y,ve4x,ve4y,ve5x,ve5y,ve6x,ve6y; //Variables para almacenar las coordenadas
+    cout<<"Creador de figuras geométricas!\n\nPor favor ingrese los vertices de la figura que desea ingresar\n";
+    cout<<"Si es una figura de menos de seis vertices, puede ingresar ceros en las entradas faltantes\n";
+    cout<<"Ingrese primero la coordenada x y luego y. Empecemos!\n";
+    cout<<"Primer vertice:\n";cin>>ve1x;cin>>ve1y;      //Se guardan los datos ingresados
+    cout<<"Segundo vertice:\n";cin>>ve2x;cin>>ve2y;
+    cout<<"Tercer vertice:\n";cin>>ve3x;cin>>ve3y;
+    cout<<"Cuarto vertice:\n";cin>>ve4x;cin>>ve4y;
+    cout<<"Quinto vertice:\n";cin>>ve5x;cin>>ve5y;
+    cout<<"Sexto vertice:\n";cin>>ve6x;cin>>ve6y;
+    cout<<"Ahora seleccione cual figura desea crear\n";
+    cout<<"1. Circulo\n2. Triangulo\n3. Rectangulo\n4. Pentagono\n5. Hexagono\n";
+    cin>>opcion;
+    Vertice obvertice1(ve1x,ve1y);          //Se crean los objetos de vertices
+    Vertice obvertice2(ve2x,ve2y);
+    Vertice obvertice3(ve3x,ve3y);
+    Vertice obvertice4(ve4x,ve4y);
+    Vertice obvertice5(ve5x,ve5y);
+    Vertice obvertice6(ve5x,ve5y);
+                                        //Las siguientes lineas son para ejecutar la opcion del menu que ingreso el usuario
+                                        //Notese que los metodos de las clases de figuras reciben como entradas
+                                        //objetos de la clase Vertice
+        Circulo cobjeto(obvertice1);
+        if(opcion==1){
+            cout<<"El perimetro es: "<<cobjeto.Cperimetro(obvertice1);
+            cout<<"\nEl area es: "<<cobjeto.Carea(obvertice1);}
+
+        Triangulo tobjeto(obvertice1,obvertice2,obvertice3);
+        if(opcion==2){
+        cout<<"El perimetro es: "<<tobjeto.Tperimetro(obvertice1,obvertice2,obvertice3);
+        cout<<"\nEl area es: "<<tobjeto.Tarea(obvertice1,obvertice2,obvertice3);}
+
+        Rectangulo robjeto(obvertice1,obvertice2,obvertice3,obvertice4);
+        if(opcion==3){
+        cout<<"El perimetro es: "<<robjeto.Rperimetro(obvertice1,obvertice2,obvertice3,obvertice4);
+        cout<<"\nEl area es: "<<robjeto.Rarea(obvertice1,obvertice2,obvertice3);}
+        
+        Pentagono pobjeto(obvertice1,obvertice2,obvertice3,obvertice4,obvertice5);
+        if(opcion==4){
+        cout<<"El perimetro es: "<<pobjeto.Pperimetro(obvertice1,obvertice2,obvertice3,obvertice4,obvertice5);
+        cout<<"\nEl area es: "<<pobjeto.Parea(obvertice1,obvertice2);}
+        
+        Hexagono hobjeto(obvertice1,obvertice2,obvertice3,obvertice4,obvertice5,obvertice6);
+        if(opcion==5){
+        cout<<"El perimetro es: "<<hobjeto.Hperimetro(obvertice1,obvertice2,obvertice3,obvertice4,obvertice5,obvertice6);
+        cout<<"\nEl area es: "<<hobjeto.Harea(obvertice1,obvertice2);}
+
     return 0;
 }
