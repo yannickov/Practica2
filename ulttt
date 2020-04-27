@@ -129,14 +129,32 @@ int main()
     cout<<"Ahora seleccione cual figura desea crear\n";
     cout<<"1. Circulo\n2. Triangulo\n3. Rectangulo\n4. Pentagono\n5. Hexagono\n";
     cin>>opcion;
-    switch(opcion){
-        case 2:
-        Vertice tvertice1(ve1x,ve1y);
-        Vertice tvertice2(ve2x,ve2y);
-        Vertice tvertice3(ve3x,ve3y);
-        Triangulo tobjeto(tvertice1,tvertice2,tvertice3);
-        tobjeto.Tperimetro(tvertice1,tvertice2,tvertice3);
-        tobjeto.Tarea(tvertice1,tvertice2,tvertice3);
-    }
+    Vertice obvertice1(ve1x,ve1y);
+    Vertice obvertice2(ve2x,ve2y);
+    Vertice obvertice3(ve3x,ve3y);
+    Vertice obvertice4(ve4x,ve4y);
+    Vertice obvertice5(ve5x,ve5y);
+    Vertice obvertice6(ve5x,ve5y);
+    
+        Circulo cobjeto(obvertice1);
+        if(opcion==1){
+            cout<<"El perimetro es: "<<cobjeto.Cperimetro(obvertice1);
+            cout<<"\nEl area es: "<<cobjeto.Carea(obvertice1);}
+
+        Triangulo tobjeto(obvertice1,obvertice2,obvertice3);
+        if(opcion==2){
+        cout<<"El perimetro es: "<<tobjeto.Tperimetro(obvertice1,obvertice2,obvertice3);
+        cout<<"\nEl area es: "<<tobjeto.Tarea(obvertice1,obvertice2,obvertice3);}
+
+        Rectangulo robjeto(obvertice1,obvertice2,obvertice3,obvertice4);
+        if(opcion==3){
+        cout<<"El perimetro es: "<<robjeto.Rperimetro(obvertice1,obvertice2,obvertice3,obvertice4);
+        cout<<"\nEl area es: "<<robjeto.Rarea(obvertice1,obvertice2,obvertice3);}
+        
+        Pentagono pobjeto(obvertice1,obvertice2,obvertice3,obvertice4,obvertice5);
+        if(opcion==4){
+        cout<<"El perimetro es: "<<pobjeto.Pperimetro(obvertice1,obvertice2,obvertice3,obvertice4,obvertice5);
+        cout<<"\nEl area es: "<<pobjeto.Parea(obvertice1,obvertice2);}
+
     return 0;
 }
