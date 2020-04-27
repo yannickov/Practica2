@@ -117,26 +117,26 @@ class Hexagono{
 int main()
 {
     int opcion; double ve1x,ve1y,ve2x,ve2y,ve3x,ve3y,ve4x,ve4y,ve5x,ve5y,ve6x,ve6y;
-    cout<<"Creador de figuras geométricas!\n\nElija la opcion de la figura que desea ingresar: \n";
-    cout<<"1. Circulo\n2. Triangulo\n3. Rectangulo\n4. Pentagono\n5. Hexagono\n:";
+    cout<<"Creador de figuras geométricas!\n\nPor favor ingrese los vertices de la figura que desea ingresar\n";
+    cout<<"Si es una figura de menos de seis vertices, puede ingresar ceros en las entradas faltantes\n";
+    cout<<"Ingrese primero la coordenada x y luego y. Empecemos!\n";
+    cout<<"Primer vertice:\n";cin>>ve1x;cin>>ve1y;
+    cout<<"Segundo vertice:\n";cin>>ve2x;cin>>ve2y;
+    cout<<"Tercer vertice:\n";cin>>ve3x;cin>>ve3y;
+    cout<<"Cuarto vertice:\n";cin>>ve4x;cin>>ve4y;
+    cout<<"Quinto vertice:\n";cin>>ve5x;cin>>ve5y;
+    cout<<"Sexto vertice:\n";cin>>ve6x;cin>>ve6y;
+    cout<<"Ahora seleccione cual figura desea crear\n";
+    cout<<"1. Circulo\n2. Triangulo\n3. Rectangulo\n4. Pentagono\n5. Hexagono\n";
     cin>>opcion;
     switch(opcion){
-        case 1:
-        cout<<"Ingrese el primer vertice. Primero x, luego y:\nSe ha creado un circulo!\n";
-        cin>>ve1x;cin>>ve1y;Vertice objeto(ve1x,ve1y);Circulo Cobjeto(objeto);
-        cout<<"El perimetro es:"<<Cobjeto.Cperimetro(objeto)<<"\ny el area es: "<<Cobjeto.Carea(objeto);
-        break;
-        
         case 2:
-        cout<<"Ingrese el primer vertice. Primero x, luego y:\n";
-        cin>>ve1x;cin>>ve1y;Vertice objeto1(ve1x,ve1y);Triangulo Tobjeto1(objeto1);
-        cout<<"Ingrese el segundo vertice. Primero x, luego y:\n";
-        cin>>ve2x;cin>>ve2y;Vertice objeto2(ve2x,ve2y);Triangulo Tobjeto2(objeto2);
-        cout<<"Ingrese el tercer vertice. Primero x, luego y:\nSe ha creado un Triangulo!\n";
-        cin>>ve3x;cin>>ve3y;Vertice objeto2(ve3x,ve3y);Triangulo Tobjeto3(objeto3);
-        cout<<"El perimetro es:"<<Tobjeto.Cperimetro(objeto1,objeto2,objeto3);
-        cout<<"\ny el area es: "<<Tobjeto.Carea(objeto1,objeto2,objeto3);
-        break;
+        Vertice tvertice1(ve1x,ve1y);
+        Vertice tvertice2(ve2x,ve2y);
+        Vertice tvertice3(ve3x,ve3y);
+        Triangulo tobjeto(tvertice1,tvertice2,tvertice3);
+        tobjeto.Tperimetro(tvertice1,tvertice2,tvertice3);
+        tobjeto.Tarea(tvertice1,tvertice2,tvertice3);
     }
     return 0;
 }
